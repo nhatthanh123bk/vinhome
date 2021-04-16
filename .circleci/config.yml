@@ -28,8 +28,8 @@ jobs:
           name: Install Deployer
           command: |
             curl -LO https://deployer.org/deployer.phar
-            sudo mv deployer.phar /usr/local/bin/dep
-            sudo chmod +x /usr/local/bin/dep
+            mv deployer.phar /usr/local/bin/dep
+            chmod +x /usr/local/bin/dep
       - run:
           name: Deploy to develop environment
           command: |
@@ -46,3 +46,6 @@ workflows:
       - deploy_development:
           requires:
             - build
+          filters:
+            branches:
+              only: develop
