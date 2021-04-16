@@ -23,7 +23,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "14:a8:e6:5f:68:cb:40:f8:28:ad:61:ac:7d:e3:2a:68"
+            - "74:28:47:90:34:86:12:6d:91:d7:c0:6b:b4:86:8a:98"
       - run:
           name: Install Deployer
           command: |
@@ -36,7 +36,7 @@ jobs:
             if [ -z `ssh-keygen -F '52.220.48.43'` ]; then
               ssh-keyscan -H '52.220.48.43' >> ~/.ssh/known_hosts
             fi
-            dep deploy -vv
+            dep deploy development -vv
 
 workflows:
   version: 2
@@ -46,3 +46,6 @@ workflows:
       - deploy_development:
           requires:
             - build
+          filters:
+            branches:
+              only: develop
