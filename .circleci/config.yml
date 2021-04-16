@@ -40,9 +40,9 @@ jobs:
 
 workflows:
   version: 2
-  deploy_development:
+  build_and_deploy_development:
     jobs:
       - build
-      - deploy:
+      - deploy_development:
           requires:
             - build
