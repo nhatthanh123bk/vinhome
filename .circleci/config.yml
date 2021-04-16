@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: framgia/laravel-workspace
+      - image: mattrayner/lamp:latest-1804
     steps:
       - checkout
       - run: cp .env.example .env
