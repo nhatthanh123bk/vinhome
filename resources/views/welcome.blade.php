@@ -12,6 +12,6 @@
         
     </head>
     <body class="antialiased">
-        <p>First deploy by Deployer</p>
+        <p>Deploy development environment by CircleCI</p>
     </body>
 </html>

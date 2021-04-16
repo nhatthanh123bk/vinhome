@@ -25,27 +25,13 @@ add('shared_dirs', [
     'bootstrap/cache',
 ]);
 
-// Writable dirs by web server
-add('writable_dirs', [
-    'bootstrap/cache',
-    'storage',
-    'storage/app',
-    'storage/app/public',
-    'storage/framework',
-    'storage/framework/cache',
-    'storage/framework/sessions',
-    'storage/framework/views',
-    'storage/logs',
-]);
-
-
 // Hosts
 
 host('52.220.48.43')
     ->user('ec2-user')
     ->stage('development')
     ->set('deploy_path', '/var/www/html/vinhome')
-    ->set('http_user', 'www-data')
+    ->set('http_user', 'ec2-user')
     ->set('writable_mode', 'chmod')
     ->forwardAgent(false);
     
