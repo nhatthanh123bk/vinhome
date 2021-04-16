@@ -40,10 +40,10 @@ jobs:
 
 workflows:
   version: 2
-  notify_deploy:
+  deploy_development:
     jobs:
       - build
-      - deploy_development:
+      - deploy:
           requires:
             - build
           filters:
