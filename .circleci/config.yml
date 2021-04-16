@@ -20,10 +20,16 @@ jobs:
     docker:
       - image: mattrayner/lamp:latest-1804
     steps:
+      - checkout
       - add_ssh_keys:
           fingerprints:
             - "14:a8:e6:5f:68:cb:40:f8:28:ad:61:ac:7d:e3:2a:68"
-      - checkout
+      - run:
+          name: Install Deployer
+          command: |
+            curl -LO https://deployer.org/deployer.phar
+            sudo mv deployer.phar /usr/local/bin/dep
+            sudo chmod +x /usr/local/bin/dep
       - run:
           name: Deploy to develop environment
           command: |
@@ -31,3 +37,15 @@ jobs:
               ssh-keyscan -H '52.220.48.43' >> ~/.ssh/known_hosts
             fi
             dep deploy -vv
+
+workflows:
+  version: 2
+  notify_deploy:
+    jobs:
+      - build
+      - deploy_development:
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
