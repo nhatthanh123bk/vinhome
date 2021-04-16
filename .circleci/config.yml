@@ -16,6 +16,18 @@ jobs:
           key: vendor-v1-{{ checksum "composer.lock" }}
           paths:
             - vendor
-
-      # run test
-      - run: phpcs --standard=Framgia app
+  deploy_development:
+    docker:
+      - image: mattrayner/lamp:latest-1804
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "14:a8:e6:5f:68:cb:40:f8:28:ad:61:ac:7d:e3:2a:68"
+      - checkout
+      - run:
+          name: Deploy to develop environment
+          command: |
+            if [ -z `ssh-keygen -F '52.220.48.43'` ]; then
+              ssh-keyscan -H '52.220.48.43' >> ~/.ssh/known_hosts
+            fi
+            dep deploy -vv
