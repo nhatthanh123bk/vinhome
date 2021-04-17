@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: mattrayner/lamp:latest-1804
+      - image: tinhnc96/glc-deployer:latest
     steps:
       - checkout
       - run: cp .env.example .env
@@ -46,6 +46,3 @@ workflows:
       - deploy_development:
           requires:
             - build
-          filters:
-            branches:
-              only: develop
